@@ -15,10 +15,10 @@
     </div>
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="./index,jsp">Home</a>
-                <a class="navbar-brand" href="./index,jsp">Login</a>
-                <a class="navbar-brand" href="./index,jsp">SignUp</a>
-                <a class="navbar-brand" href="./index,jsp">CS</a>
+                <a class="navbar-brand" href="./index.jsp">Home</a>
+                <a class="navbar-brand" href="./index.jsp">Login</a>
+                <a class="navbar-brand" href="./index.jsp">SignUp</a>
+                <a class="navbar-brand" href="./index.jsp">CS</a>
             </div>
         </div>
     </nav>
