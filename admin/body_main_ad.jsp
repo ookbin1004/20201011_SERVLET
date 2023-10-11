@@ -1,10 +1,10 @@
 <%@ page contentType = "text/html;charset=utf-8" %>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="dto.Product"%>
-<jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session" />
+<%@ page import="dao.ProductRepository"%>
 
-<%! String greeting = "Welcome to Web Shooping Mall";
-        String tagline = "Welcome to Web Market!";%>
+<%! String greeting = "현재 페이지는 상품 목록입니다.";
+        String tagline = "하단 페이지 : 확인";%>
 <div class="container">
     <div class="jumbotron">
         <div class="container">
@@ -14,7 +14,8 @@
         </div>
     </div>
     <%
-        ArrayList<Product> listOfProducts = productDAO.getAllProducts();
+        ProductRepository dao = ProductRepository.getInstance();
+        ArrayList<Product> listOfProducts = dao.getAllProducts();
     %>
     <div class="container">
         <div class="row" align="center">
@@ -38,7 +39,7 @@
 				<p><%=product.getDescription()%>
 				<p><%=product.getUnitPrice()%>원
                 <p>
-                    <a href="product_detail.jsp?id=<%=product.getProductId()%>" class = "btn btn-secondary" role ="button"> 상품 상세 정보 &ge;</a>
+                    <a href="product_detail_ad.jsp?id=<%=product.getProductId()%>" class = "btn btn-secondary" role ="button"> 상품 상세 정보 &ge;</a>
 			</div>
             <%
                 }

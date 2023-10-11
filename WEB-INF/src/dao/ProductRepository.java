@@ -4,6 +4,11 @@ import dto.Product;
 
 public class ProductRepository {
     private ArrayList<Product> listOfProducts = new ArrayList<Product>();
+    private static ProductRepository instance = new ProductRepository();
+    
+    public static ProductRepository getInstance(){
+        return instance;
+    }
     
     public ProductRepository(){
         Product phone = new Product("P1234", "Galaxy S22+", 200000);
@@ -12,6 +17,7 @@ public class ProductRepository {
 		phone.setManufacturer("Samsung");
 		phone.setUnitsInStock(1000);
 		phone.setCondition("Old");
+        phone.setFilename("P1234.jpg");
         
         Product pad = new Product("P5678", "iPad", 600000);
         pad.setDescription("8.3-inch, 2266X1488 Liquid Retina Display");
@@ -19,6 +25,7 @@ public class ProductRepository {
         pad.setManufacturer("Apple");
         pad.setUnitsInStock(1000);
         pad.setCondition("New");
+        pad.setFilename("P5678.jpg");
         
         Product Headphone = new Product("P9012", "AirPods Max", 800000);
         Headphone.setDescription("Bluetooth 5.0, Noise Canceling, 134.5g");
@@ -26,6 +33,7 @@ public class ProductRepository {
         Headphone.setManufacturer("Apple");
         Headphone.setUnitsInStock(1000);
         Headphone.setCondition("New");
+        Headphone.setFilename("P9012.jpg");
         
         listOfProducts.add(phone);
         listOfProducts.add(pad);
@@ -47,5 +55,9 @@ public class ProductRepository {
             }
         }
         return productById;
+    }
+    
+    public void addProduct(Product product){
+        listOfProducts.add(product);
     }
 }
