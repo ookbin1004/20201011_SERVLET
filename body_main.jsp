@@ -2,7 +2,7 @@
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="dto.Product"%>
 <%@ page import="dao.ProductRepository"%>
-<%@ page import="java.sql.*"%>
+<%@ page import="java.sql.*" %>
 <%@ include file="db/db_conn.jsp"%>
 <jsp:useBean id="productDAO" class="dao.ProductRepository" scope="session" />
 
@@ -23,13 +23,13 @@
         <div class="row" align="center">
             <%
                 String sql = "select * from product";
-	        	pstmt = conn.prepareStatement(sql);
-	        	rs = pstmt.executeQuery();
-	        	while (rs.next()) {
+                pstmt = conn.prepareStatement(sql);
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
             %>
             <div class="col-md-4">
                 <div class="card bg-dark text-dark"> 
-                    <img src="image/product/<%=rs.getString("p_fileName")%>" class="card-img" alt="...">
+                    <img src="img/<%=rs.getString("p_filename")%>" class="card-img" alt="...">
                     <div class="card-img-overlay">
                         <h5 class="card-title">
                             스마트폰 이미지 샘플
