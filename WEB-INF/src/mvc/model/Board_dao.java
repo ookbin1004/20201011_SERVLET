@@ -148,39 +148,47 @@ public class Board_dao {
 		return null;
 	}
     
-	public void insertBoard(Board_dto board)  {
-	
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try {
-			conn = Db_connection.getConnection();		
+	public void insertBoard(Board_dto board) {
+    Connection conn = null;
+    PreparedStatement pstmt = null;
 
-			String sql = "insert into board values(?, ?, ?, ?, ?, ?, ?, ?)";
-		
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, board.getNum());
-			pstmt.setString(2, board.getId());
-			pstmt.setString(3, board.getName());
-			pstmt.setString(4, board.getSubject());
-			pstmt.setString(5, board.getContent());
-			pstmt.setString(6, board.getRegist_day());
-			pstmt.setInt(7, board.getHit());
-			pstmt.setString(8, board.getIp());
+    try {
+        conn = Db_connection.getConnection();
+        String sql = "insert into board values(?, ?, ?, ?, ?, ?, ?, ?)";
+        pstmt = conn.prepareStatement(sql);
 
-			pstmt.executeUpdate();
-		} catch (Exception ex) {
-			System.out.println("insertBoard() 에러 : " + ex);
-		} finally {
-			try {									
-				if (pstmt != null) 
-					pstmt.close();				
-				if (conn != null) 
-					conn.close();
-			} catch (Exception ex) {
-				throw new RuntimeException(ex.getMessage());
-			}		
-		}		
-	} 
+        if (board.getId() == null || board.getName() == null || 
+            board.getSubject() == null || board.getContent() == null || 
+            board.getRegist_day() == null || board.getIp() == null) {
+            System.out.println("Error: Missing board field");
+            return;
+        }
+
+        pstmt.setInt(1, board.getNum());
+        pstmt.setString(2, board.getId());
+        pstmt.setString(3, board.getName());
+        pstmt.setString(4, board.getSubject());
+        pstmt.setString(5, board.getContent());
+        pstmt.setString(6, board.getRegist_day());
+        pstmt.setInt(7, board.getHit());
+        pstmt.setString(8, board.getIp());
+        pstmt.executeUpdate();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (pstmt != null) {
+                pstmt.close();
+            }
+
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+} 
 
 	public void updateHit(int num) {
 

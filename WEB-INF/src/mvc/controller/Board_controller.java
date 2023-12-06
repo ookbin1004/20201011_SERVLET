@@ -104,27 +104,37 @@ public class Board_controller extends HttpServlet {
 	}
 	
 	public void requestBoardWrite(HttpServletRequest request){
-					
-		Board_dao dao = Board_dao.getInstance();		
-		
-		Board_dto board = new Board_dto();
-		board.setId(request.getParameter("id"));
-		board.setName(request.getParameter("name"));
-		board.setSubject(request.getParameter("subject"));
-		board.setContent(request.getParameter("content"));	
-		
-		System.out.println(request.getParameter("name"));
-		System.out.println(request.getParameter("subject"));
-		System.out.println(request.getParameter("content"));
-		java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
-		String regist_day = formatter.format(new java.util.Date()); 
-		
-		board.setHit(0);
-		board.setRegist_day(regist_day);
-		board.setIp(request.getRemoteAddr());			
-		
-		dao.insertBoard(board);								
-	}
+        Board_dao dao = Board_dao.getInstance();		
+        Board_dto board = new Board_dto();
+
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String subject = request.getParameter("subject");
+        String content = request.getParameter("content");
+
+        if (id == null || name == null || subject == null || content == null) {
+            System.out.println("Error: Missing parameter");
+            return;
+        }
+
+        board.setId(id);
+        board.setName(name);
+        board.setSubject(subject);
+        board.setContent(content);	
+
+        java.text.SimpleDateFormat formatter = new java.text.SimpleDateFormat("yyyy/MM/dd(HH:mm:ss)");
+        String regist_day = formatter.format(new java.util.Date()); 
+
+        board.setHit(0);
+        board.setRegist_day(regist_day);
+        board.setIp(request.getRemoteAddr());			
+
+        try {
+            dao.insertBoard(board);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }							
+    }
 	
 	public void requestBoardView(HttpServletRequest request){
 					

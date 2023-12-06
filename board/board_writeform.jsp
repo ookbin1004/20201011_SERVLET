@@ -14,19 +14,21 @@
         <title>고객센터 게시판</title>
     </head>
     <script type="text/javascript">
-        function checkForm() {
-            if (!document.newWrite.name.value) {
-	            alert("성명을 입력하세요.");
-	        return false;
-            }
-            if (!document.newWrite.subject.value) {
-	            alert("제목을 입력하세요.");
-	            return false;
-            }
-            if (!document.newWrite.content.value) {
-	            alert("내용을 입력하세요.");
-	            return false;
-            }		
+    function checkForm() {
+        var form = document.forms["newWrite"];
+        if (!form["name"].value.trim()) {
+            alert("성명을 입력하세요.");
+            return false;
+        }
+        if (!form["subject"].value.trim()) {
+            alert("제목을 입력하세요.");
+            return false;
+        }
+        if (!form["content"].value.trim()) {
+            alert("내용을 입력하세요.");
+            return false;
+        }
+        return true;
         }
     </script>
     <body>
